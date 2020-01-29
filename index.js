@@ -1,8 +1,9 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const axios = require("axios");
-const generateHtml = require("./generateHTML");
+const generateHTML = require("./generateHTML");
 
+// console.log(colors);
 inquirer
     .prompt([
         {
@@ -15,33 +16,29 @@ inquirer
             message: "What is your favorite color?",
             name: "color",
             choices: [
-                "Green",
-                "Blue",
-                "Pink",
-                "Red"
+                "green",
+                "blue",
+                "pink",
+                "red"
             ]
         }
     ])
-    // .then(function({ color }){
-    //     // generateHTML();
-    // })
 
-    .then(function({ username }) {
-        const queryUrl = `https://api.github.com/users/${username}`;
-        axios
-            .get(queryUrl)
-            .then(function(res) {
-                console.log(res.data.name)
-    //             // fs.writeFile(`${username}.pdf`, JSON.stringify(res), (err, data) => {
-    //             //     if (err){
-    //             //         throw err;
-    //             //     }
-    //             //     console.log("success");
-    //             // })
-            });
-    });
+    .then(function(response) {
+        const queryUrl = `https://api.github.com/users/${response.username}`;
 
-    //How do the two js files communicate with each other? how do i reference a function declared in a different js file?
+        axios.get(queryUrl)
+            .then(function(profileInfo){
+                console.log(profileInfo.data.name);
+        })
+            // .then(function(res) {
+            //     fs.writeFile(`${response.username}.html`, generateHTML(profileInfo), (err, data) => {
+            //         if (err){
+            //             throw err;
+            //         }
+            //         console.log("success");
+            //     })
+            // })
+    })
 
-    //once we have user color, how do we use it to generate html in the corresponding color?
-        //how do we parse the data from the axios call to populate on this new html page?
+    // ${data.name}, data.location, etc.
