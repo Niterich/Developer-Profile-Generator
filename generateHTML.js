@@ -1,3 +1,5 @@
+
+
 const colors = {
   green: {
     wrapperBackground: "#E6E1C3",
@@ -173,6 +175,46 @@ function generateHTML(data) {
       </style>
       </head>
       <body>
+      <div class="wrapper">
+            <div class="photo-header container">
+                <img src="${data.avatar_url}" alt="" />
+                <h1>HI!</h1>
+                <h1>My name is ${data.name}</h1>
+                <h2 class="">Currently ${data.company}</h2>
+                <div class="row">
+                    <a class="row nav-link" target="_blank" href="https://www.google.com/maps/place/${data.location}">Currently in ${data.location}</a>
+                    <a class="row nav-link" href="${data.html_url}">Github</a>
+                    <a class="row nav-link" href="${data.blog}">Blog</a>
+                </div>
+            </div>
+        </div>
+        <main>
+            <div class="container">
+                <h2 class="bio">
+                ${data.bio}
+                </h2>
+                <div class="row">
+                    <div class="card col">
+                        <h4>Public repositories</h4>
+                        <h5>${data.public_repos}</h5>
+                    </div>
+                    <div class="card col">
+                        <h4>Followers</h4>
+                        <h5>${data.followers}</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card col">
+                        <h4>GitHub Stars</h4>
+                        <h5>25</h5>
+                    </div>
+                    <div class="card col">
+                        <h4>Following</h4>
+                        <h5>${data.following}</h5>
+                    </div>
+                </div>
+            </div>
+        </main>
       </body>`
         }
 

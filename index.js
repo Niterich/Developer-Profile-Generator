@@ -2,6 +2,8 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const axios = require("axios");
 const generateHTML = require("./generateHTML");
+let username;
+let data;
 
 // console.log(colors);
 inquirer
@@ -29,15 +31,18 @@ inquirer
 
         axios.get(queryUrl)
             .then(function(profileInfo){
-                console.log(profileInfo.data.name);
+                data = profileInfo.data;
+                username = data.login;
+                console.log(data);
+                fs.writeFile(`${username}.html`, generateHTML(profileInfo), (err, dt) => {
+                    if (err){
+                        throw err;
+                    }
+                    console.log("success");
+                })
         })
             // .then(function(res) {
-            //     fs.writeFile(`${response.username}.html`, generateHTML(profileInfo), (err, data) => {
-            //         if (err){
-            //             throw err;
-            //         }
-            //         console.log("success");
-            //     })
+                
             // })
     })
 
