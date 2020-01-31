@@ -3,9 +3,7 @@ const fs = require("fs");
 const axios = require("axios");
 const generateHTML = require("./generateHTML");
 let username;
-let data;
 
-// console.log(colors);
 inquirer
     .prompt([
         {
@@ -28,22 +26,22 @@ inquirer
 
     .then(function(response) {
         const queryUrl = `https://api.github.com/users/${response.username}`;
-
+    
         axios.get(queryUrl)
             .then(function(profileInfo){
-                data = profileInfo.data;
-                username = data.login;
-                console.log(data);
-                fs.writeFile(`${username}.html`, generateHTML(profileInfo), (err, dt) => {
+                const userInput = {
+                    color: response.color,
+                    profileInfo: profileInfo.data
+                }
+                username = profileInfo.data.login;
+                fs.writeFile(`${username}.html`, generateHTML(userInput), (err, dt) => {
                     if (err){
                         throw err;
                     }
                     console.log("success");
                 })
         })
-            // .then(function(res) {
-                
-            // })
     })
 
-    // ${data.name}, data.location, etc.
+    // how do you get the html doc to save has a pdf?
+    // finish updating readme
