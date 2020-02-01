@@ -1,7 +1,7 @@
 # Developer-Profile-Generator
 A CLI app that generates a an html document based on a given users GitHub Profile.
 
-Deployed: 
+Deployed: https://niterich.github.io/Developer-Profile-Generator/
 
 Technologies used: JavaScript, Terminal
 
