@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const axios = require("axios");
 const generateHTML = require("./generateHTML");
+var pdf = require('html-pdf');
 let username;
 
 inquirer
@@ -34,12 +35,16 @@ inquirer
                     profileInfo: profileInfo.data
                 }
                 username = profileInfo.data.login;
-                fs.writeFile(`${username}.html`, generateHTML(userInput), (err, dt) => {
-                    if (err){
-                        throw err;
-                    }
-                    console.log("success");
-                })
+                // fs.writeFile(`${username}.html`, generateHTML(userInput), (err, dt) => {
+                //     if (err){
+                //         throw err;
+                //     }
+                //     console.log("success");
+                // })
+                pdf.create(generateHTML(userInput)).toFile(`${username}.pdf`, function(err, res) {
+                    if (err) return console.log(err);
+                    console.log(res);
+                  });
         })
     })
 
